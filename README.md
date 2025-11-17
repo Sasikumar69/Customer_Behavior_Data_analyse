@@ -51,6 +51,7 @@ Customer-Behavior-Analysis/
 ├── sql_queries/ (10 business questions)
 ├── powerbi/ (dashboard files)
 └── images/ (screenshots)
+
 📈 Key Insights
 Female customers generate higher revenue
 
@@ -62,11 +63,16 @@ Weekly shoppers are most valuable segment
 
 🚀 Getting Started
 bash
-git clone https://github.com/Sasikumar69/Customer_Behavior_Analyse.git
+git clone https://github.com/yourusername/Customer-Behavior-Analysis.git
+👥 Connect With Me
+https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin
+https://img.shields.io/badge/Portfolio-Visit-green?style=for-the-badge&logo=google-chrome
+https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github
 
-👥 Connect
 Sasikumar Anandan
 
-LinkedIn: [linkedin.com/in/sasikumar-anandan]
+🔗 LinkedIn Profile
 
-Portfolio: [sasikumar69.github.io/personal-portfolio]
+🌐 Personal Portfolio
+
+💻 GitHub Profile
