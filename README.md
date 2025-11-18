@@ -4,6 +4,12 @@ A complete end-to-end data analytics project covering **data cleaning**, **SQL b
 
 ---
 
+## 📊 Dashboard Preview
+
+![Customer Behavior Dashboard](images/dashboard_preview.png)
+
+---
+
 ## 🚀 Project Overview
 
 This project analyzes customer purchasing behavior using a full data pipeline — from raw data processing to BI dashboard creation. It helps businesses understand spending patterns, customer segments, seasonal revenue trends, and subscription performance.
