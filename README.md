@@ -6,7 +6,7 @@ A complete end-to-end data analytics project covering **data cleaning**, **SQL b
 
 ## 📊 Dashboard Preview
 
-![Customer Behavior Dashboard](images/dashboard_preview.png)
+![Customer Behavior Dashboard](images/dashboard_preview.png.png)
 
 ---
 
