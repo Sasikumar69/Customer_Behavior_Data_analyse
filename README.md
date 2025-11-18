@@ -1,249 +1,132 @@
-CUSTOMER BEHAVIOR ANALYSIS DASHBOARD
-Complete Project Documentation
+# 📊 Customer Behavior Analysis Dashboard
 
-TABLE OF CONTENTS
-1. Project Overview
-2. Technologies Used
-3. Project Workflow
-4. Data Cleaning Process
-5. SQL Business Analysis
-6. Power BI Dashboard
-7. Key Insights
-8. Business Impact
-9. Project Files
-10. Contact Information
+A complete end-to-end data analytics project covering **data cleaning**, **SQL business analysis**, and **Power BI dashboard development**. This README provides project details, installation steps, workflow, insights, and file structure.
 
-1. PROJECT OVERVIEW
-A comprehensive data analysis project that explores customer purchasing behavior through complete data pipeline from raw data cleaning to interactive dashboard visualization.
+---
 
-Key Metrics:
-- Total Customers: 3,900
-- Total Revenue: $233,000
-- Average Purchase Amount: $59.76
-- Average Review Rating: 3.75/5 stars
+## 🚀 Project Overview
 
-2. TECHNOLOGIES USED
-- Python 3.8+ with Pandas, NumPy
-- SQL (PostgreSQL/MySQL)
-- Microsoft Power BI
-- Jupyter Notebook
-- Git & GitHub
+This project analyzes customer purchasing behavior using a full data pipeline — from raw data processing to BI dashboard creation. It helps businesses understand spending patterns, customer segments, seasonal revenue trends, and subscription performance.
 
-3. PROJECT WORKFLOW
+### **Key Metrics**
 
-Phase 1: Data Preparation & Cleaning
-- Tool: Python with Pandas
-- Activities: 
-  * Handling missing values and data inconsistencies
-  * Standardizing categorical variables
-  * Creating derived features (purchase_frequency_days)
-  * Data validation and quality checks
+* **Total Customers:** 3,900
+* **Total Revenue:** $233,000
+* **Average Purchase Amount:** $59.76
+* **Average Review Rating:** 3.75 / 5
 
-Phase 2: Business Intelligence & Analysis
-- Tool: SQL
-- Activities:
-  * 10 strategic business questions answered
-  * Customer segmentation analysis
-  * Revenue pattern identification
-  * Subscription impact assessment
+---
 
-Phase 3: Data Visualization & Reporting
-- Tool: Power BI
-- Activities:
-  * Interactive dashboard development
-  * Custom theme implementation
-  * Slicer-based filtering system
+## 🛠️ Technologies Used
 
-4. DATA CLEANING PROCESS
+* **Python 3.8+** (Pandas, NumPy)
+* **SQL** (PostgreSQL/MySQL)
+* **Power BI**
+* **Jupyter Notebook**
+* **Git & GitHub**
 
-Python/Pandas Operations:
-- Handling missing values using median imputation
-- Standardizing categorical values:
-  * Gender: 'M'/'F' to 'Male'/'Female'
-  * Categories: Standardized naming
-  * Seasons: Consistent formatting
+---
 
-Frequency Mapping Created:
-- Weekly: 7 days
-- Fortnightly: 14 days
-- Monthly: 30 days
-- Quarterly: 90 days
-- Annually: 365 days
+## 🔄 Project Workflow
 
-Data Validation:
-- Range checks for numerical values
-- Consistency checks for categorical data
-- Business rule validation
+### **Phase 1: Data Preparation & Cleaning (Python)**
 
-5. SQL BUSINESS ANALYSIS
+* Handling missing values (median imputation)
+* Standardizing categorical fields
+* Creating derived columns (e.g., `purchase_frequency_days`)
+* Data validation and quality checks
 
-10 Business Questions Answered:
+### **Phase 2: Business Analysis (SQL)**
 
-1. Revenue by Gender Segmentation
-SELECT gender, SUM(Purchase_amount) As Total_revenue
-FROM customer
-GROUP BY gender;
+Conducted analysis on:
 
-2. Discount Strategy Effectiveness
-SELECT customer_id, purchase_amount
-FROM customer
-WHERE discount_applied = 'Yes' 
-AND purchase_amount >= (SELECT AVG(purchase_amount) FROM customer);
+* Revenue segmentation
+* Customer demographics
+* Seasonal patterns
+* Subscription impact
+* Spending behaviors
 
-3. Top Rated Products Analysis
-SELECT item_purchased, ROUND(AVG(review_rating::numeric),2) As Avg_Review_rating
-FROM customer
-GROUP BY item_purchased
-ORDER BY AVG(review_rating) DESC
-LIMIT 5;
+*(Only the topics are mentioned. Actual queries are inside `sql_queries/business_questions.sql`)*
 
-4. Shipping Method Impact
-SELECT shipping_type, ROUND(AVG(purchase_amount),2)
-FROM customer
-WHERE shipping_type IN ('Standard', 'Express')
-GROUP BY shipping_type;
+### **Phase 3: Dashboard Development (Power BI)**
 
-5. Subscription Program Value
-SELECT subscription_status,
-COUNT(customer_id) As Total_customer,
-ROUND(AVG(purchase_amount),2) As AVG_spend,
-ROUND(SUM(purchase_amount),2) As Total_revenue
-FROM customer
-GROUP BY subscription_status;
+* KPI cards and category-wise visuals
+* Slicers for interactive filtering
+* Custom theme for professional design
 
-6. Discount Promotion Success
-SELECT item_purchased,
-ROUND((SUM(CASE WHEN discount_applied = 'Yes' THEN 1 ELSE 0 END) * 100) / COUNT(*) , 2) As Discount_rate
-FROM customer
-GROUP BY item_purchased 
-ORDER BY Discount_rate DESC
-LIMIT 5;
+---
 
-7. Customer Loyalty Segmentation
-WITH customer_type As (
-    SELECT customer_id, previous_purchases,
-    CASE 
-        WHEN previous_purchases = 1 THEN 'New'
-        WHEN previous_purchases BETWEEN 2 AND 10 THEN 'Returning'
-        ELSE 'Loyal'
-    END AS Customer_segment
-    FROM customer
-)
-SELECT customer_segment, COUNT(*) As Total
-FROM customer_type
-GROUP BY customer_segment;
+## 🧹 Data Cleaning Summary
 
-8. Age Group Spending Patterns
-SELECT age_group, 
-ROUND(AVG(purchase_amount),2) as avg_spend,
-COUNT(*) as customer_count
-FROM customer
-GROUP BY age_group
-ORDER BY avg_spend DESC;
+Performed using Python:
 
-9. Seasonal Revenue Analysis
-SELECT season,
-ROUND(SUM(purchase_amount),2) as season_revenue
-FROM customer
-GROUP BY season
-ORDER BY season_revenue DESC;
+* Missing value treatment
+* Standardizing labels: Gender, Category, Seasons
+* Frequency mapping:
 
-10. Payment Method Preferences
-SELECT payment_method,
-COUNT(*) as usage_count,
-ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM customer)),2) as usage_percentage
-FROM customer
-GROUP BY payment_method
-ORDER BY usage_count DESC;
+  * Weekly → 7 days
+  * Fortnightly → 14 days
+  * Monthly → 30 days
+  * Quarterly → 90 days
+  * Annually → 365 days
 
-6. POWER BI DASHBOARD
+---
 
-Dashboard Components:
+## 📈 Dashboard Summary (Power BI)
 
-Top Metrics Cards:
-- Number of customers: 3,900
-- Total Revenue: $233K
-- Average purchase amount: $59.76
-- Average Review Rating: 3.75
+### **Main Visuals**
 
-Visualizations:
-1. Total Revenue by Category (Bar Chart)
-   - Clothing, Accessories, Footwear, Outerwear
-2. Total Revenue by Season (Bar Chart)
-   - Fall, Spring, Winter, Summer
-3. Revenue & Customers by Age Group (Combo Chart)
-   - Young Adult, Middle-aged, Adult, Senior
-4. Customers by Gender (Donut Chart)
-   - Male: 32%, Female: 68%
-5. Subscription Status (Pie Chart)
-   - Yes: 27%, No: 73%
-6. Customers by Purchase Frequency (Bar Chart)
+* Revenue by Category
+* Revenue by Season
+* Customers & Revenue by Age Group
+* Customers by Gender
+* Subscription Status
+* Purchase Frequency Distribution
 
-Interactive Slicers:
-- Gender (Male/Female)
-- Subscription Status (Yes/No)
-- Frequency Type (All/Weekly/Monthly/Quarterly/Annual)
-- Payment Method (All options)
-- Age Group (All segments)
-- Category (All categories)
+### **Slicers**
 
-Color Scheme:
-- Primary Color: #1f77b4 (Professional Blue)
-- Secondary Colors: #ff7f0e (Orange), #2ca02c (Green)
-- Background: #f8f9fa (Light Gray)
-- Slicer Selection: #ff7f0e (Orange)
+* Gender
+* Age Group
+* Payment Method
+* Subscription Status
+* Category
+* Frequency Type
 
-7. KEY INSIGHTS
+### **Color Palette**
 
-Revenue Patterns:
-- Female customers contribute 68% of total revenue
-- Winter season generates 35% higher revenue than summer
-- Clothing category is top revenue generator (40% of total)
-- Subscribers spend 25% more on average
+* Blue: `#1f77b4`
+* Orange: `#ff7f0e`
+* Green: `#2ca02c`
+* Background: `#f8f9fa`
 
-Customer Behavior:
-- Weekly shoppers have 40% higher lifetime value
-- Middle-aged customers (35-50) are highest spending demographic
-- Express shipping users spend 15% more per order
+---
 
-Operational Insights:
-- 30% of customers use discounts while maintaining above-average spending
-- Top-rated products have 50% higher repeat purchase rate
-- Loyal customers (10+ purchases) represent 20% of total revenue
+## 🔍 Key Insights
 
-8. BUSINESS IMPACT
+* **Female customers contribute 68% of revenue**
+* **Winter season generates the highest revenue**
+* **Clothing category accounts for 40% of revenue**
+* **Subscribers spend 25% more on average**
+* Weekly shoppers show **40% higher lifetime value**
+* Middle-aged customers spend the most
 
-Strategic Decisions Supported:
+---
 
-1. Marketing Optimization
-   - Focus resources on female customer segments
-   - Increase winter season promotional activities
-   - Target middle-aged demographic with premium offers
+## 💼 Business Impact
 
-2. Subscription Program Expansion
-   - Invest in subscriber acquisition based on proven higher spending
-   - Develop tiered subscription models
-   - Enhance subscriber benefits and retention programs
+### **Supports Strategic Decisions in:**
 
-3. Inventory Management
-   - Optimize stock levels based on category performance
-   - Increase inventory for high-performing categories during peak seasons
-   - Reduce slow-moving items based on sales data
+* Marketing optimization
+* Subscription program enhancement
+* Inventory planning
+* Pricing & discount strategies
+* Customer retention programs
 
-4. Pricing & Discount Strategy
-   - Implement targeted discount programs for high-value products
-   - Develop personalized offers based on purchase frequency
-   - Create bundle deals for frequently purchased together items
+---
 
-5. Customer Retention
-   - Develop loyalty programs for frequent shoppers
-   - Implement win-back campaigns for lapsing customers
-   - Create personalized communication based on purchase history
+## 📁 Project Structure
 
-9. PROJECT FILES
-
-Complete Folder Structure:
-
+```
 Customer-Behavior-Analysis/
 │
 ├── data/
@@ -268,61 +151,55 @@ Customer-Behavior-Analysis/
 │   └── dashboard_preview.png
 │
 └── README.md
-
-File Descriptions:
-
-data/raw_data.csv - Original dataset with customer transactions
-data/cleaned_data.csv - Processed data after Python cleaning
-notebooks/01_data_cleaning.ipynb - Complete data preprocessing notebook
-notebooks/02_data_analysis.ipynb - Exploratory data analysis
-sql_queries/business_questions.sql - All 10 SQL queries with solutions
-powerbi/customer_behavior_dashboard.pbix - Main Power BI dashboard
-powerbi/dashboard_theme.json - Custom color theme for Power BI
-docs/project_report.pdf - Comprehensive analysis report
-images/dashboard_preview.png - Dashboard screenshot
-README.md - Project documentation and setup instructions
-
-10. CONTACT INFORMATION
-
-Sasikumar Anandan
-Data Analyst | Business Intelligence Professional
-
-Connect with me:
-LinkedIn: https://linkedin.com/in/sasikumar-anandan
-Portfolio: https://sasikumar69.github.io/personal-portfolio
-GitHub: https://github.com/sasikumar69
-Email: sasikumam77@gmail.com
-
-Technical Skills:
-- Python (Pandas, NumPy, Matplotlib)
-- SQL & Database Management
-- Power BI & Data Visualization
-- Business Intelligence
-- Data Analysis & Reporting
-- Statistical Analysis
-
-Business Skills:
-- Data-Driven Decision Making
-- Customer Behavior Analysis
-- Revenue Optimization
-- Strategic Planning
-- Performance Metrics
-- Business Reporting
-
-PROJECT CONCLUSION
-
-This Customer Behavior Analysis Dashboard project demonstrates comprehensive data analysis skills from raw data processing to business insights delivery. The project showcases ability to:
-
-- Clean and prepare real-world data using Python
-- Perform complex business analysis using SQL
-- Create interactive dashboards with Power BI
-- Derive actionable business insights
-- Present findings in professional manner
-
-The insights generated help businesses optimize marketing strategies, improve customer retention, and increase revenue through data-driven decisions.
+```
 
 ---
-Project Completed: December 2024
-Version: 1.0
-Status: Production Ready
+
+## 🔗 Contact & Profiles
+
+**Author:** *Sasikumar Anandan*
+**Role:** Data Analyst | BI Professional
+
+### Connect with me:
+
+* **LinkedIn:** [Click Here](https://linkedin.com/in/sasikumar-anandan)
+* **GitHub:** [Click Here](https://github.com/sasikumar69)
+* **Portfolio:** [Click Here](https://sasikumar69.github.io/personal-portfolio)
+* **Email:** [sasikumam77@gmail.com](mailto:sasikumam77@gmail.com)
+
 ---
+
+## 🧠 Skills Demonstrated
+
+### **Technical Skills**
+
+* Python (Pandas, NumPy)
+* SQL (PostgreSQL/MySQL)
+* Power BI & Data Visualization
+* Data Cleaning & Preprocessing
+* Statistical & Business Analysis
+
+### **Business Skills**
+
+* Revenue & customer behavior analysis
+* Strategic decision support
+* BI dashboard reporting
+* Data-driven insights
+
+---
+
+## ✅ Project Conclusion
+
+This project showcases a complete analytical workflow from **raw data → insights → dashboard**. It demonstrates strong capabilities in:
+
+* Data preprocessing
+* SQL analysis
+* BI visualization
+* Insight storytelling
+* Business recommendation generation
+
+This dashboard assists businesses in optimizing marketing campaigns, improving customer retention, and increasing revenue through actionable data insights.
+
+---
+
+If you like this project, feel free to ⭐ star the repository on GitHub!
